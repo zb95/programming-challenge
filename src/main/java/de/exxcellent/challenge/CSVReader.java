@@ -6,7 +6,6 @@ import java.io.FileReader;
 import java.io.BufferedReader;
 import java.io.IOException;
 
-//TODO: change hashmap to map in declaration
 public class CSVReader {
 	public static ArrayList<HashMap<String, String>> parseIntoArrayList(String fileName) throws IOException{
 		try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
