@@ -14,7 +14,7 @@ public class Data {
 	} 
 	
 	public int countEntries() {
-		return 0;
+		return data == null ? 0 : data.size();
 	}
 	
 	public String getEntry(String header, int row) {
