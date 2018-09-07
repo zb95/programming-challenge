@@ -6,8 +6,8 @@ import java.io.FileReader;
 import java.io.BufferedReader;
 import java.io.IOException;
 
-public class CSVReader {
-	public static ArrayList<HashMap<String, String>> parseIntoArrayList(String fileName) throws IOException{
+public class CSVReader implements DataReader{
+	public ArrayList<HashMap<String, String>> parseIntoArrayList(String fileName){
 		try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
 			ArrayList<HashMap<String, String>> arr = 
 					new ArrayList<HashMap<String, String>>();
@@ -32,6 +32,9 @@ public class CSVReader {
 				}
 			}
 			return arr;
+		} catch (IOException e) {
+			System.err.println("Error parsing file: " + e.getMessage());
 		}
+		return null;
 	}
 }

@@ -3,7 +3,6 @@ package de.exxcellent.challenge;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.function.Function;
-import java.io.IOException;
 
 public class Data {
 	private ArrayList<HashMap<String, String>> entries;
@@ -13,7 +12,7 @@ public class Data {
 		this.reader = new CSVReader();
 	} 
 	
-	public Data(DataReader reader, String fileName) throws IOException{
+	public Data(DataReader reader, String fileName){
 		this.reader = reader == null ? new CSVReader() : reader;
 		if (fileName != null) {
 			parseFile(fileName);
@@ -28,7 +27,7 @@ public class Data {
 		return entries == null ? null : entries.get(row).get(header);
 	}
 	
-	public void parseFile(String fileName) throws IOException{
+	public void parseFile(String fileName){
 		this.entries = reader.parseIntoArrayList(fileName);
 	}
 }

@@ -6,7 +6,6 @@ import org.junit.Test;
 import java.net.URL;
 import java.lang.Integer;
 import java.util.function.Function;
-import java.io.IOException;
 
 public class DataTest {
 
@@ -17,7 +16,7 @@ public class DataTest {
 	private Data dat;
 	
 	@Before
-	public void initialize() throws IOException{
+	public void initialize(){
 		URL url = getClass().getResource(SIMPLE_CSV_FILE);
 		
 		dat = new Data();
@@ -53,7 +52,7 @@ public class DataTest {
 	}
 	
 	@Test
-	public void testMaxFunctionForHeader() throws IOException{
+	public void testMaxFunctionForHeader(){
 		Function<Data, Function<String, String>> maxOfData = 
 			d -> header -> {
 				int maxFound = Integer.MIN_VALUE;

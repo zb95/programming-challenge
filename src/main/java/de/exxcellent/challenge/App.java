@@ -2,7 +2,7 @@ package de.exxcellent.challenge;
 
 import java.util.function.Function;
 import java.net.URL;
-import java.io.IOException;
+
 /**
  * The entry class for your solution. This class is only aimed as starting point and not intended as baseline for your software
  * design. Read: create your own classes and packages as appropriate.
@@ -19,7 +19,7 @@ public final class App {
 		public R apply(One one, Two two, Three three, Four four);
 	}
 
-    public static void main(String... args) throws IOException{
+    public static void main(String... args){
 		
 		FourParFunction<Data, String, String, String, String> minSpread = 
 			(d, returnHeader, diffHeader1, diffHeader2) -> {

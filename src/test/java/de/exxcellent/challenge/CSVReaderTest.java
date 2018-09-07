@@ -2,14 +2,18 @@ package de.exxcellent.challenge;
 
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.After;
 import org.junit.Test;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.io.IOException;
+import java.io.PrintStream;
+import java.io.ByteArrayOutputStream;
 
 public class CSVReaderTest {
 
+	private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
+	private final PrintStream originalErr = System.err;
 	private final static String FILE_PREFIX = "/de/exxcellent/challenge/";
 	private final static String EMPTY_CSV_FILE = FILE_PREFIX + "testDataEmpty.csv";
 	private final static String SIMPLE_CSV_FILE = FILE_PREFIX + "testDataSimple.csv";
@@ -22,15 +26,25 @@ public class CSVReaderTest {
 		reader = new CSVReader();
 	}
 	
+	@Before
+	public void setUpStreams() {
+		System.setErr(new PrintStream(errContent));
+	}
+	
+	@After
+	public void restoreStreams() {
+		System.setErr(originalErr);
+	}
+	
 	@Test
-	public void emptyCSVFileShouldBeParsedAsEmptyArrayList() throws IOException{
+	public void emptyCSVFileShouldBeParsedAsEmptyArrayList(){
 		URL url = getClass().getResource(EMPTY_CSV_FILE);
 		ArrayList<HashMap<String, String>> dataArray = reader.parseIntoArrayList(url.getPath());
 		Assert.assertTrue(dataArray.isEmpty());
 	}
 	
 	@Test
-	public void simpleCSVFileShouldBeParsed() throws IOException{
+	public void simpleCSVFileShouldBeParsed(){
 		final String HEADER_1 = "Header1";
 		final String HEADER_2 = "Header2";
 		URL url = getClass().getResource(SIMPLE_CSV_FILE);
@@ -42,7 +56,7 @@ public class CSVReaderTest {
 	}
 	
 	@Test
-	public void CSVFileWithSpacesShouldBeParsed() throws IOException{
+	public void CSVFileWithSpacesShouldBeParsed(){
 		final String HEADER_1 = "Header 1";
 		final String HEADER_2 = "Header 2";
 		URL url = getClass().getResource(CSV_FILE_WITH_SPACES);
@@ -53,7 +67,7 @@ public class CSVReaderTest {
 		Assert.assertEquals("4", dataArray.get(1).get(HEADER_2));
 	}
 	
-	@Test
+	/* @Test
 	public void MalformedCSVFileShouldThrowException() {
 		try {
 			URL url = getClass().getResource(MALFORMED_CSV_FILE);
@@ -63,5 +77,12 @@ public class CSVReaderTest {
 			Assert.assertEquals("CSV entry must have as many columns as header!", ioEx.getMessage());
 		}
 		
+	} */
+	
+	@Test
+	public void ErrorMessageShownForMalformedCSVFile() {
+		URL url = getClass().getResource(MALFORMED_CSV_FILE);
+		ArrayList<HashMap<String, String>> dataArray = reader.parseIntoArrayList(url.getPath());
+		Assert.assertEquals("Error parsing file: CSV entry must have as many columns as header!\r\n", errContent.toString());
 	}
 }
