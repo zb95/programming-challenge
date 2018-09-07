@@ -15,11 +15,6 @@ public final class App {
 	private final static String FOOTBALL_FILE = FILE_PREFIX + "football.csv";
 	
 	@FunctionalInterface
-	interface ThreeParFunction<One, Two, Three, R> {
-		public R apply(One one, Two two, Three three);
-	}
-	
-	@FunctionalInterface
 	interface FourParFunction<One, Two, Three, Four, R> {
 		public R apply(One one, Two two, Three three, Four four);
 	}
