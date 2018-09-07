@@ -10,7 +10,6 @@ import java.io.IOException;
 
 public class CSVReaderTest {
 
-	/* private final static String FILE_PREFIX = "/de/exxcellent/challenge/"; */
 	private final static String FILE_PREFIX = "/de/exxcellent/challenge/";
 	private final static String EMPTY_CSV_FILE = FILE_PREFIX + "testDataEmpty.csv";
 	private final static String SIMPLE_CSV_FILE = FILE_PREFIX + "testDataSimple.csv";
@@ -49,7 +48,7 @@ public class CSVReaderTest {
 	}
 	
 	@Test
-	public void MalformedCSVFileShouldThrowException() throws IOException{
+	public void MalformedCSVFileShouldThrowException() {
 		try {
 			URL url = getClass().getResource(MALFORMED_CSV_FILE);
 			ArrayList<HashMap<String, String>> dataArray = CSVReader.parseIntoArrayList(url.getPath());
