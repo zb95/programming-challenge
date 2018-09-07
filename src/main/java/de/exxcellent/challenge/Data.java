@@ -7,13 +7,13 @@ import java.io.IOException;
 
 public class Data {
 	private ArrayList<HashMap<String, String>> entries;
-	private CSVReader reader;
+	private DataReader reader;
 	
 	public Data() {
 		this.reader = new CSVReader();
 	} 
 	
-	public Data(CSVReader reader, String fileName) throws IOException{
+	public Data(DataReader reader, String fileName) throws IOException{
 		this.reader = reader == null ? new CSVReader() : reader;
 		if (fileName != null) {
 			parseFile(fileName);
