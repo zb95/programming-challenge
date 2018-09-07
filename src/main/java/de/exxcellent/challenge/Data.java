@@ -13,11 +13,15 @@ public class Data {
 		this.reader = new CSVReader();
 	} 
 	
-	public void parseFile(String fileName) throws IOException{
-		this.data = reader.parseIntoArrayList(fileName);
+	public int countEntries() {
+		return 0;
 	}
 	
-	public String computeValue(Function<ArrayList<HashMap<String, String>>, String> f) {
-		return f.apply(this.data);
+	public String getEntry(String header, int row) {
+		return null;
+	}
+	
+	public void parseFile(String fileName) throws IOException{
+		this.data = reader.parseIntoArrayList(fileName);
 	}
 }
