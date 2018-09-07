@@ -6,7 +6,7 @@ import java.util.function.Function;
 import java.io.IOException;
 
 public class Data {
-	private ArrayList<HashMap<String, String>> data;
+	private ArrayList<HashMap<String, String>> entries;
 	private CSVReader reader;
 	
 	public Data() {
@@ -14,14 +14,14 @@ public class Data {
 	} 
 	
 	public int countEntries() {
-		return data == null ? 0 : data.size();
+		return entries == null ? 0 : entries.size();
 	}
 	
 	public String getEntry(String header, int row) {
-		return data == null ? null : data.get(row).get(header);
+		return entries == null ? null : entries.get(row).get(header);
 	}
 	
 	public void parseFile(String fileName) throws IOException{
-		this.data = reader.parseIntoArrayList(fileName);
+		this.entries = reader.parseIntoArrayList(fileName);
 	}
 }
