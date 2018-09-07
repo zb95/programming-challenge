@@ -13,6 +13,13 @@ public class Data {
 		this.reader = new CSVReader();
 	} 
 	
+	public Data(CSVReader reader, String fileName) throws IOException{
+		this.reader = reader == null ? new CSVReader() : reader;
+		if (fileName != null) {
+			parseFile(fileName);
+		}
+	}
+	
 	public int countEntries() {
 		return entries == null ? 0 : entries.size();
 	}
