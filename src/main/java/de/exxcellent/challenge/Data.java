@@ -18,7 +18,7 @@ public class Data {
 	}
 	
 	public String getEntry(String header, int row) {
-		return null;
+		return data == null ? null : data.get(row).get(header);
 	}
 	
 	public void parseFile(String fileName) throws IOException{
